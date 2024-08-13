@@ -1,0 +1,25 @@
+{
+  "name": "template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "pnpm": "9.5.0",
+    "npm": "please_use_pnpm_instead"
+  },
+  "packageManager": "pnpm@9.5.0",
+  "scripts": {
+    "web": "pnpm -F \"web\"",
+    "api": "pnpm -F \"api\"",
+    "dev": "pnpm --parallel -F \"./**\" dev",
+    "build": "pnpm --parallel -F \"./**\" build",
+    "start": "pnpm --parallel -F \"./**\" start",
+    "typecheck": "pnpm --parallel -F \"./**\" typecheck"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "workspaces": [
+    "services/*"
+  ]
+}

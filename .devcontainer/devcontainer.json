@@ -1,0 +1,35 @@
+{
+    "name": "TanStack + tRPC",
+    "dockerComposeFile": "../compose.yml",
+    "service": "app",
+    "workspaceFolder": "/workspace",
+    "mounts": [
+        "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached"
+    ],
+    "customizations": {
+        "settings": {
+            "terminal.integrated.shell.linux": "/bin/bash"
+        },
+        "vscode": {
+            "extensions": [
+                "GitLab.gitlab-workflow",
+                "ms-azuretools.vscode-docker",
+                "Prisma.prisma",
+                "esbenp.prettier-vscode",
+                "eamodio.gitlens",
+                "oderwat.indent-rainbow",
+                "mhutchie.git-graph",
+                "streetsidesoftware.code-spell-checker",
+                "IronGeek.vscode-env",
+                "yoavbls.pretty-ts-errors",
+                "Orta.vscode-twoslash-queries"
+            ],
+            "settings": {
+                "editor.formatOnSave": true,
+                "editor.indentSize": "tabSize",
+                "editor.tabSize": 2
+            }
+        }
+    },
+    "postCreateCommand": "/bin/sh postCreate.sh"
+}

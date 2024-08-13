@@ -1,0 +1,9 @@
+{
+  "cSpell.words": [
+    "devcontainer",
+    "superjson",
+    "tanstack",
+    "typecheck"
+  ],
+  "typescript.preferences.importModuleSpecifier": "relative"
+}
