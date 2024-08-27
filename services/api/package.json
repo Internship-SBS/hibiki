@@ -9,7 +9,9 @@
     "build": "tsc -p tsconfig.build.json",
     "start": "node dist/src/index.js",
     "typecheck": "tsc --noEmit",
-    "db:reset": "prisma generate && prisma migrate reset -f && prisma migrate dev --name init && tsx prisma/seeds/init.ts"
+    "db:reset": "prisma generate && prisma migrate reset -f && prisma migrate dev --name init && tsx prisma/seeds/init.ts",
+    "db:studio": "prisma studio",
+    "db:generate": "prisma generate"
   },
   "keywords": [],
   "author": "",

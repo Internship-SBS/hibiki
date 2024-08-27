@@ -1,58 +1,59 @@
-import {
-  createFileRoute,
-  Link,
-  Outlet,
-  useLocation,
-} from "@tanstack/react-router";
-import { queryClient } from "./__root";
+import { createFileRoute, Outlet } from "@tanstack/react-router";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
-import { AppShell, Button, Container, Stack } from "@mantine/core";
-import { IconUserPlus } from "@tabler/icons-react";
+import { AppShell, Box, Space, Tabs } from "@mantine/core";
 import { getQueryKey } from "@trpc/react-query";
-import { UserCard } from "../components/UserCard";
 import { trpc, trpcClient } from "../utils/trpc";
+import { DivisionTabPanelContent } from "../components/DivisionTabPanelContent";
+import { queryClient } from "../utils/queryClient";
 
-const usersQueryOptions = queryOptions({
-  queryKey: getQueryKey(trpc.users.getUsers),
-  queryFn: () => trpcClient.users.getUsers.query(),
+const loginUserQueryOptions = queryOptions({
+  queryKey: getQueryKey(trpc.users.getLoginUser),
+  queryFn: () => trpcClient.users.getLoginUser.query(),
 });
 
-export const usersRouteOption = {
-  loader: () => queryClient.ensureQueryData(usersQueryOptions),
-  component: Page,
-};
+const divisionsQueryOptions = queryOptions({
+  queryKey: getQueryKey(trpc.divisions.getDivisions),
+  queryFn: () => trpcClient.divisions.getDivisions.query(),
+});
 
-export const Route = createFileRoute("/users")(usersRouteOption);
+export const Route = createFileRoute("/users")({
+  loader: async () =>
+    await Promise.all([
+      queryClient.ensureQueryData(divisionsQueryOptions),
+      queryClient.ensureQueryData(loginUserQueryOptions),
+    ]),
+  component: Page,
+});
 
 function Page() {
-  const usersData = useSuspenseQuery(usersQueryOptions);
-  const users = usersData.data;
-  const location = useLocation();
+  const divisionsData = useSuspenseQuery(divisionsQueryOptions);
+  const divisions = divisionsData.data;
+  const loginUserData = useSuspenseQuery(loginUserQueryOptions);
+  const loginUserDivision = loginUserData.data?.Divisions[0];
 
   return (
     <>
       <AppShell.Main>
-        <Container>
-          <Stack>
-            {users.map((user) => (
-              <UserCard
-                key={user.id}
-                user={user}
-                active={location.pathname.includes(user.id)}
-              />
+        <Box>
+          <Tabs
+            defaultValue={loginUserDivision?.id ?? divisions[0].id}
+            keepMounted={false}
+          >
+            <Tabs.List>
+              {divisions.map((division) => (
+                <Tabs.Tab key={division.id} value={division.id}>
+                  {division.name}
+                </Tabs.Tab>
+              ))}
+            </Tabs.List>
+            {divisions.map((division) => (
+              <Tabs.Panel key={division.id} value={division.id}>
+                <Space h={16} />
+                <DivisionTabPanelContent division={division} />
+              </Tabs.Panel>
             ))}
-            <Link to="/users/new" style={{ textDecoration: "none" }}>
-              <Button
-                component="span"
-                variant="tertiary"
-                leftSection={<IconUserPlus />}
-                fullWidth
-              >
-                Create User
-              </Button>
-            </Link>
-          </Stack>
-        </Container>
+          </Tabs>
+        </Box>
       </AppShell.Main>
       <Outlet />
     </>

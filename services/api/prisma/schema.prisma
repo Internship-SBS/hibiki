@@ -14,7 +14,38 @@ datasource db {
 }
 
 model User {
-  id   String  @id() @default(uuid())
-  name String
-  bio  String?
+  id         String       @id() @default(uuid())
+  name       String
+  email      String       @unique
+  Divisions  Division[]
+  comment    String?
+  extension  String?
+  UserStatus UserStatus[]
+}
+
+model Division {
+  id    String @id @default(uuid())
+  name  String @unique
+  Users User[]
+}
+
+model UserStatus {
+  id             String   @id @default(uuid())
+  User           User     @relation(fields: [userId], references: [id])
+  Status         Status   @relation(fields: [statusId], references: [id])
+  description    String?
+  goDirectly     Boolean?
+  returnDirectly Boolean?
+  endTime        String?
+  userId         String
+  statusId       String
+  createdAt      DateTime @default(now())
+}
+
+model Status {
+  id         String       @id @default(uuid())
+  name       String       @unique
+  bgColor    String
+  textColor  String
+  UserStatus UserStatus[]
 }

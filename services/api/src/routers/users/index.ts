@@ -1,8 +1,11 @@
 import { router } from "../../trpc";
 import { createUser } from "./createUser";
 import { deleteUser } from "./deleteUser";
+import { getLoginUser } from "./getLoginUser";
 import { getUserById } from "./getUserById";
 import { getUsers } from "./getUsers";
+import { getUsersByDivision } from "./getUsersByDivision";
+import { updateComment } from "./updateComment";
 import { updateUser } from "./updateUser";
 
 export const userRouter = router({
@@ -11,4 +14,7 @@ export const userRouter = router({
   createUser,
   updateUser,
   deleteUser,
+  getLoginUser,
+  getUsersByDivision,
+  updateComment,
 });
