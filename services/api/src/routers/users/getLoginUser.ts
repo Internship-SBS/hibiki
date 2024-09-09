@@ -21,7 +21,7 @@ export const getLoginUser = publicProcedure
   .query(async () => {
     const user = await prisma.user.findUnique({
       where: {
-        id: "test",
+        id: "testLoginUserId59234619",
       },
       include: {
         Divisions: true,

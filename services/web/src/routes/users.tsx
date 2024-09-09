@@ -26,10 +26,9 @@ export const Route = createFileRoute("/users")({
 });
 
 function Page() {
-  const divisionsData = useSuspenseQuery(divisionsQueryOptions);
-  const divisions = divisionsData.data;
-  const loginUserData = useSuspenseQuery(loginUserQueryOptions);
-  const loginUserDivision = loginUserData.data?.Divisions[0];
+  const { data: divisions } = useSuspenseQuery(divisionsQueryOptions);
+  const { data: loginUser } = useSuspenseQuery(loginUserQueryOptions);
+  const loginUserDivision = loginUser.Divisions[0];
 
   return (
     <>

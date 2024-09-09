@@ -1,6 +1,6 @@
 import { Division } from "@app/api/prisma/client";
 import { trpc } from "../utils/trpc";
-import { Group, Loader, Paper, Skeleton, Text } from "@mantine/core";
+import { Group, Skeleton, Text } from "@mantine/core";
 import { UserCard } from "./UserCard";
 
 type Props = {

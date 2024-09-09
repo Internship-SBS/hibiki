@@ -10,10 +10,12 @@ import {
   UnstyledButton,
   ThemeIcon,
   Flex,
+  Grid,
 } from "@mantine/core";
 import { Status, User, UserStatus } from "../../../api/prisma/client";
 import { useDisclosure } from "@mantine/hooks";
 import { IconClock, IconPhone, IconRun } from "@tabler/icons-react";
+import { UserModalContent } from "./UserModalContent";
 
 type Props = {
   user: User & {
@@ -100,23 +102,53 @@ export function UserCard(props: Props) {
       <Modal
         opened={isOpen}
         onClose={close}
-        size="lg"
+        size="md"
         title={
-          <Group gap="xs">
-            <Pill
-              size="sm"
-              bg={user.UserStatus.Status.bgColor}
-              c={user.UserStatus.Status.textColor}
-            >
-              {user.UserStatus.Status.name}
-            </Pill>
-            <Title order={2} c="dark" size={20}>
-              {name}
-            </Title>
-          </Group>
+          <Stack>
+            <Group gap="xs">
+              <Pill
+                size="sm"
+                bg={user.UserStatus.Status.bgColor}
+                c={user.UserStatus.Status.textColor}
+              >
+                {user.UserStatus.Status.name}
+              </Pill>
+              <Title order={2} c="dark" size={20}>
+                {name}
+              </Title>
+            </Group>
+            {user.UserStatus.Status.name === "外出" && (
+              <Group gap="4 12">
+                <Flex gap="xs">
+                  <ThemeIcon variant="secondary" size="sm">
+                    <IconRun />
+                  </ThemeIcon>
+                  <Text>{user.UserStatus.description}</Text>
+                </Flex>
+                {user.UserStatus.endTime && (
+                  <Flex gap={4}>
+                    <ThemeIcon variant="secondary" size="sm">
+                      <IconClock />
+                    </ThemeIcon>
+                    <Text>{user.UserStatus.endTime} まで</Text>
+                  </Flex>
+                )}
+                {user.UserStatus.goDirectly && (
+                  <Pill bg="red" c="white">
+                    直行
+                  </Pill>
+                )}
+                {user.UserStatus.returnDirectly && (
+                  <Pill bg="indigo" c="white">
+                    直帰
+                  </Pill>
+                )}
+              </Group>
+            )}
+          </Stack>
         }
       >
-        a
+        {isOpen && <UserModalContent userId={user.id} />}
       </Modal>
     </>
   );

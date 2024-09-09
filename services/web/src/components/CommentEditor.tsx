@@ -24,7 +24,7 @@ export function CommentEditor(props: Props) {
   const utils = trpc.useUtils();
   const commentUpdater = trpc.users.updateComment.useMutation({
     onSuccess: () => {
-      utils.users.invalidate();
+      utils.users.getUsersByDivision.invalidate();
       utils.invalidate(undefined, { queryKey: [loginUser.id] });
       done();
     },

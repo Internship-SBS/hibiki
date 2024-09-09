@@ -49,16 +49,12 @@ export function GoOutButton(props: Props) {
       endTime: "",
     },
     onSubmit: (values) => {
-      console.log(values.value);
-      console.log(form.state.errors);
       goOutCreator.mutate({
         userId: loginUserId,
         description: values.value.description,
         goDirectly: values.value.goDirectly,
         returnDirectly: values.value.returnDirectly,
-        endTime: values.value.returnDirectly
-          ? null
-          : (values.value.endTime ?? null),
+        endTime: values.value.endTime,
       });
       close();
     },
@@ -69,8 +65,8 @@ export function GoOutButton(props: Props) {
       <Popover.Target>
         <Button
           variant={active ? "primary" : "secondary"}
-          fullWidth
           onClick={open}
+          fullWidth
         >
           外出
         </Button>
