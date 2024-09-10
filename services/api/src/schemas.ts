@@ -8,6 +8,7 @@ export const UserSchema = z.object({
   email: z.string().email(),
   comment: z.string().nullable(),
   extension: z.string().nullable(),
+  updatedAt: z.coerce.date()
 } satisfies SchemaOf<User>);
 export const UserCreateSchema = UserSchema.omit({ id: true });
 export const UserUpdateSchema = UserSchema;
@@ -15,6 +16,7 @@ export const UserUpdateCommentSchema = UserSchema.omit({
   name: true,
   email: true,
   extension: true,
+  updatedAt: true,
 });
 
 export const DivisionSchema = z.object({
