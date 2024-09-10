@@ -52,8 +52,8 @@ export function UserModalContent(props: Props) {
               <Text>読み込み中</Text>
             </Skeleton>
           ) : (
-            <Text>{formatDistance(user.UserStatus[0].createdAt, Date.now(),{locale:ja})}前</Text>
-            //<Text>{formatDistance(user.updatedAt,Date.now())}</Text>
+            <Text>{formatDistance(user.updatedAt, Date.now(),{locale:ja})}前</Text>
+            //<Text>{formatDistance(user.UserStatus[0].createdAt,Date.now())}</Text>
             //isAfter(user.UserStatus[0].createdAt, user.updatedAt)
           )}
         </Grid.Col>
