@@ -1,7 +1,7 @@
 import z from "zod";
 import { prisma } from "../../../prisma/client";
 import { publicProcedure } from "../../trpc";
-import { DivisionSchema, UserSchema } from "../../schemas";
+import { DivisionSchema, UserSchema, UserStatusSchema } from "../../schemas";
 import { TRPCError } from "@trpc/server";
 
 export const getUserById = publicProcedure
@@ -9,6 +9,7 @@ export const getUserById = publicProcedure
   .output(
     UserSchema.extend({
       Divisions: z.array(DivisionSchema),
+      UserStatus: z.array(UserStatusSchema),
     })
   )
   .query(async ({ input }) => {
@@ -18,6 +19,7 @@ export const getUserById = publicProcedure
       },
       include: {
         Divisions: true,
+        UserStatus: true,
       },
     });
     if (!user) throw new TRPCError({ code: "NOT_FOUND" });
