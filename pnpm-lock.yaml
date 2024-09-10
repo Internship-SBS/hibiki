@@ -83,6 +83,9 @@ importers:
       '@trpc/react-query':
         specifier: 11.0.0-rc.466
         version: 11.0.0-rc.466(@tanstack/react-query@5.51.5(react@18.3.1))(@trpc/client@11.0.0-rc.466(@trpc/server@11.0.0-rc.466))(@trpc/server@11.0.0-rc.466)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      date-fns:
+        specifier: ^3.6.0
+        version: 3.6.0
       dayjs:
         specifier: ^1.11.12
         version: 1.11.12

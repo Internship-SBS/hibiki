@@ -1,5 +1,6 @@
 import { Grid, Skeleton, Stack, Text } from "@mantine/core";
 import { trpc } from "../utils/trpc";
+import { format } from "date-fns";
 
 type Props = {
   userId: string;
@@ -41,7 +42,7 @@ export function UserModalContent(props: Props) {
           )}
         </Grid.Col>
         <Grid.Col span={4}>
-          <Text c="dimmed">メールアドレス</Text>
+          <Text c="dimmed">最終更新日時</Text>
         </Grid.Col>
         <Grid.Col span={8}>
           {isLoading ? (
@@ -49,7 +50,7 @@ export function UserModalContent(props: Props) {
               <Text>読み込み中</Text>
             </Skeleton>
           ) : (
-            <Text>{user.email}</Text>
+            <Text>{format(user.updatedAt, 'yyyy-mm-dd HH:mm')}</Text>
           )}
         </Grid.Col>
       </Grid>
