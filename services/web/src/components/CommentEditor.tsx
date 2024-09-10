@@ -95,7 +95,7 @@ export function CommentEditor(props: Props) {
       ) : (
         <UnstyledButton onClick={edit}>
           <InputLabel>コメント</InputLabel>
-          <Alert mih={101} color="gray" p="xs">
+          <Alert mih={101} color="gray" p="xs" style={{ whiteSpace: 'pre-line' }}>
             {loginUser.comment}
           </Alert>
         </UnstyledButton>

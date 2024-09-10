@@ -92,7 +92,7 @@ export function UserCard(props: Props) {
                 <Text size="sm">{user.extension}</Text>
               </Group>
             </Stack>
-            <Alert color="gray" px="xs" py={8} mih={66}>
+            <Alert color="gray" px="xs" py={8} mih={66} style={{ whiteSpace: 'pre-line' }}>
               <Text c="dark">{comment}</Text>
             </Alert>
           </Stack>
