@@ -54,7 +54,7 @@ export function GoOutButton(props: Props) {
         description: values.value.description,
         goDirectly: values.value.goDirectly,
         returnDirectly: values.value.returnDirectly,
-        endTime: values.value.endTime,
+        endTime: values.value.returnDirectly ? "" : values.value.endTime,
       });
       close();
     },
