@@ -21,6 +21,7 @@ model User {
   comment    String?
   extension  String?
   UserStatus UserStatus[]
+  updatedAt  DateTime     @updatedAt
 }
 
 model Division {
