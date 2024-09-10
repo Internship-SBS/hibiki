@@ -50,7 +50,7 @@ export function UserModalContent(props: Props) {
               <Text>読み込み中</Text>
             </Skeleton>
           ) : (
-            <Text>{format(user.updatedAt, 'yyyy-mm-dd HH:mm')}</Text>
+            <Text>{format(user.updatedAt, 'yyyy-MM-dd HH:mm')}</Text>
           )}
         </Grid.Col>
       </Grid>
